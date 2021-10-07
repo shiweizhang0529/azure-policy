@@ -1,0 +1,59 @@
+{
+ "properties": {
+  "displayName": "markiniative",
+  "policyType": "Custom",
+  "metadata": {
+   "createdBy": "23d92290-79da-4cc3-b3ad-03b79aea480a",
+   "createdOn": "2020-09-09T04:46:50.3219852Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyDefinitions": [
+   {
+    "policyDefinitionReferenceId": "402965029985087019",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/9ea02ca2-71db-412d-8b00-7c7ca9fcd32d",
+    "parameters": {
+     "tagName": {
+      "value": "applicationproductowner"
+     }
+    },
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "5535408667796743418",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/9ea02ca2-71db-412d-8b00-7c7ca9fcd32d",
+    "parameters": {
+     "tagName": {
+      "value": "applicationname"
+     }
+    },
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "16113435477118706715",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/9ea02ca2-71db-412d-8b00-7c7ca9fcd32d",
+    "parameters": {
+     "tagName": {
+      "value": "environment"
+     }
+    },
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "9781505517241243654",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/9ea02ca2-71db-412d-8b00-7c7ca9fcd32d",
+    "parameters": {
+     "tagName": {
+      "value": "baucostcentre"
+     }
+    },
+    "groupNames": []
+   }
+  ],
+  "policyDefinitionGroups": []
+ },
+ "id": "/subscriptions/2ab0e855-92b8-4804-b21d-30b83fc1d258/providers/Microsoft.Authorization/policySetDefinitions/bf6e1539-22d5-436e-b63c-6d1a369ad51b",
+ "type": "Microsoft.Authorization/policySetDefinitions",
+ "name": "bf6e1539-22d5-436e-b63c-6d1a369ad51b"
+}
