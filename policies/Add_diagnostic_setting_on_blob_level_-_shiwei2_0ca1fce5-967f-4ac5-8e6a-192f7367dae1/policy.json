@@ -1,0 +1,108 @@
+{
+ "properties": {
+  "displayName": "Add diagnostic setting on blob level - shiwei2",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "createdBy": "643af8b3-2696-4e64-987c-8facd7ff704a",
+   "createdOn": "2022-07-06T12:52:34.2173604Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "logAnalytics": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Log Analytics workspace",
+     "description": "Select Log Analytics workspace from dropdown list. If this workspace is outside of the scope of the assignment you must manually grant 'Log Analytics Contributor' permissions (or similar) to the policy assignment's principal ID.",
+     "strongType": "omsWorkspace",
+     "assignPermissions": true
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "field": "type",
+    "equals": "Microsoft.Storage/storageAccounts/blobServices"
+   },
+   "then": {
+    "effect": "deployIfNotExists",
+    "details": {
+     "type": "Microsoft.Insights/diagnosticSettings",
+     "existenceCondition": {
+      "allOf": [
+       {
+        "field": "Microsoft.Insights/diagnosticSettings/logs[*].enabled",
+        "equals": "True"
+       }
+      ]
+     },
+     "roleDefinitionIds": [
+      "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+     ],
+     "deployment": {
+      "properties": {
+       "mode": "incremental",
+       "template": {
+        "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+         "logAnalytics": {
+          "type": "string"
+         },
+         "storageAccountName": {
+          "type": "String"
+         }
+        },
+        "variables": {
+         "diagnosticSettingsName": "paul-diagsettings4blob"
+        },
+        "resources": [
+         {
+          "type": "Microsoft.Storage/storageAccounts/blobServices/providers/diagnosticsettings",
+          "apiVersion": "2017-05-01-preview",
+          "name": "[concat(parameters('storageAccountName'),'/Microsoft.Insights/', variables('diagnosticSettingsName'))]",
+          "properties": {
+           "workspaceId": "[parameters('logAnalytics')]",
+           "logs": [
+            {
+             "category": "StorageRead",
+             "enabled": true
+            },
+            {
+             "category": "StorageWrite",
+             "enabled": true
+            },
+            {
+             "category": "StorageDelete",
+             "enabled": true
+            }
+           ],
+           "metrics": [
+            {
+             "category": "Transaction",
+             "enabled": true
+            }
+           ]
+          }
+         }
+        ]
+       },
+       "parameters": {
+        "storageAccountName": {
+         "value": "[field('fullname')]"
+        },
+        "logAnalytics": {
+         "value": "[parameters('logAnalytics')]"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "id": "/subscriptions/2ab0e855-92b8-4804-b21d-30b83fc1d258/providers/Microsoft.Authorization/policyDefinitions/0ca1fce5-967f-4ac5-8e6a-192f7367dae1",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "0ca1fce5-967f-4ac5-8e6a-192f7367dae1"
+}
